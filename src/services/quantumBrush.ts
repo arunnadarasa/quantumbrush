@@ -42,6 +42,22 @@ export const quantumBrushAPI = {
       userInput: Record<string, any>;
     }
   ): Promise<Blob> {
+    // Validate stroke data before sending
+    if (!strokeData.image.startsWith('data:image/')) {
+      throw new Error('Invalid image format - must be data URL');
+    }
+    if (strokeData.path.length === 0) {
+      throw new Error('Path cannot be empty');
+    }
+
+    console.log('📤 Sending stroke request:', {
+      url: `${API_CONFIG.baseURL}/render/${effectName}/stroke`,
+      pathPoints: strokeData.path.length,
+      clickPoints: strokeData.clicks.length,
+      userInput: strokeData.userInput,
+      imageDataPrefix: strokeData.image.substring(0, 50) + '...',
+    });
+
     const response = await fetch(
       `${API_CONFIG.baseURL}/render/${effectName}/stroke`,
       {
@@ -51,10 +67,28 @@ export const quantumBrushAPI = {
       }
     );
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `Failed to apply stroke effect: ${response.statusText}`);
+    // Check content type to determine if it's an error response
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType?.includes('application/json')) {
+      // API returned JSON (likely an error)
+      const errorData = await response.json();
+      console.error('❌ API returned JSON error:', errorData);
+      throw new Error(
+        errorData.error || 
+        errorData.message || 
+        `API returned JSON instead of image: ${JSON.stringify(errorData)}`
+      );
     }
+
+    if (!response.ok) {
+      throw new Error(`Failed to apply stroke effect: ${response.statusText}`);
+    }
+
+    console.log('✅ Received image blob:', {
+      type: response.headers.get('content-type'),
+      size: response.headers.get('content-length')
+    });
 
     return response.blob();
   }
