@@ -8,7 +8,7 @@ import { Download } from 'lucide-react';
 import { quantumBrushAPI } from '@/services/quantumBrush';
 import { useToast } from '@/hooks/use-toast';
 import { StrokeData, EffectParameters, DEFAULT_PARAMETERS } from '@/types/stroke';
-import { compositeStrokeResult, exportCompositeImage } from '@/utils/imageComposition';
+import { compositeStrokeResult, exportCompositeImage, blobToBase64 } from '@/utils/imageComposition';
 import quantumHero from '@/assets/quantum-hero.jpg';
 
 const QuantumBrush = () => {
@@ -112,7 +112,7 @@ const QuantumBrush = () => {
         blobType: resultBlob.type,
       });
 
-      const resultUrl = URL.createObjectURL(resultBlob);
+      const resultUrl = await blobToBase64(resultBlob);
 
       setStrokes(prev =>
         prev.map(s =>
