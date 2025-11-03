@@ -115,7 +115,7 @@ export const DrawingCanvas = ({
         const colorIndex = strokeCount % STROKE_COLORS.length;
         path.set({
           stroke: STROKE_COLORS[colorIndex],
-          strokeWidth: 3,
+          strokeWidth: brushSize,
           opacity: 0.7,
           selectable: false,
           evented: false,
