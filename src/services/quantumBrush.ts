@@ -30,5 +30,32 @@ export const quantumBrushAPI = {
     }
 
     return response.blob();
+  },
+
+  // Apply stroke-based effect
+  async applyStrokeEffect(
+    effectName: string,
+    strokeData: {
+      image: string; // base64 data URL
+      path: [number, number][];
+      clicks: [number, number][];
+      userInput: Record<string, any>;
+    }
+  ): Promise<Blob> {
+    const response = await fetch(
+      `${API_CONFIG.baseURL}/render/${effectName}/stroke`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(strokeData),
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `Failed to apply stroke effect: ${response.statusText}`);
+    }
+
+    return response.blob();
   }
 };
