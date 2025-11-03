@@ -49,9 +49,9 @@ export const StrokeManager = ({
   };
 
   return (
-    <Card className="p-6 h-fit">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">Stroke Manager</h2>
+    <Card className="p-4 md:p-6 h-fit">
+      <div className="flex items-center justify-between mb-4 md:mb-6">
+        <h2 className="text-xl md:text-2xl font-bold">Stroke Manager</h2>
         <Button
           onClick={onRunAllStrokes}
           disabled={strokes.length === 0}
@@ -59,7 +59,7 @@ export const StrokeManager = ({
           variant="outline"
         >
           <Play className="mr-2 h-4 w-4" />
-          Run All
+          <span className="hidden sm:inline">Run All</span>
         </Button>
       </div>
 
@@ -69,7 +69,7 @@ export const StrokeManager = ({
           <p className="text-sm mt-2">Draw on the canvas to create strokes</p>
         </div>
       ) : (
-        <ScrollArea className="h-[600px] pr-4">
+        <ScrollArea className="h-[300px] lg:h-[600px] pr-4">
           <div className="space-y-4">
             {strokes.map((stroke) => (
               <Card key={stroke.id} className="p-4">

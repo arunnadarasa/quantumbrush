@@ -26,8 +26,8 @@ export const EffectControlPanel = ({
   onDrawingModeToggle,
 }: EffectControlPanelProps) => {
   return (
-    <Card className="p-6 h-fit">
-      <h2 className="text-2xl font-bold mb-6">Effect Controls</h2>
+    <Card className="p-4 md:p-6 h-fit">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Effect Controls</h2>
 
       <div className="space-y-6">
         {/* Drawing Mode Toggle */}

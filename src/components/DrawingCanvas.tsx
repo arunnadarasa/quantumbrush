@@ -19,20 +19,41 @@ export const DrawingCanvas = ({
   onImageLoad 
 }: DrawingCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [fabricCanvas, setFabricCanvas] = useState<FabricCanvas | null>(null);
   const [clicks, setClicks] = useState<[number, number][]>([]);
   const [strokeCount, setStrokeCount] = useState(0);
+  const [canvasSize, setCanvasSize] = useState({ width: 800, height: 600 });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Color palette for different strokes
   const STROKE_COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
 
+  // Calculate responsive canvas size
+  useEffect(() => {
+    const updateCanvasSize = () => {
+      if (!containerRef.current) return;
+      
+      const containerWidth = containerRef.current.clientWidth;
+      const isMobile = window.innerWidth < 1024;
+      
+      let width = isMobile ? Math.min(containerWidth - 32, 600) : 800;
+      let height = isMobile ? Math.min(width * 0.75, 450) : 600;
+      
+      setCanvasSize({ width, height });
+    };
+
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
+    return () => window.removeEventListener('resize', updateCanvasSize);
+  }, []);
+
   useEffect(() => {
     if (!canvasRef.current) return;
 
     const canvas = new FabricCanvas(canvasRef.current, {
-      width: 800,
-      height: 600,
+      width: canvasSize.width,
+      height: canvasSize.height,
       backgroundColor: '#ffffff',
     });
 
@@ -46,7 +67,7 @@ export const DrawingCanvas = ({
     return () => {
       canvas.dispose();
     };
-  }, []);
+  }, [canvasSize]);
 
   useEffect(() => {
     if (!fabricCanvas) return;
@@ -178,8 +199,8 @@ export const DrawingCanvas = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-2">
+    <div ref={containerRef} className="flex flex-col gap-4">
+      <div className="flex flex-wrap gap-2">
         <input
           ref={fileInputRef}
           type="file"
@@ -191,23 +212,25 @@ export const DrawingCanvas = ({
           onClick={() => fileInputRef.current?.click()}
           variant="outline"
           size="sm"
+          className="flex-1 sm:flex-none"
         >
           <Upload className="mr-2 h-4 w-4" />
-          Load Image
+          <span className="hidden sm:inline">Load Image</span>
+          <span className="sm:hidden">Load</span>
         </Button>
-        <Button onClick={handleClear} variant="outline" size="sm">
+        <Button onClick={handleClear} variant="outline" size="sm" className="flex-1 sm:flex-none">
           <Eraser className="mr-2 h-4 w-4" />
-          Clear
+          <span className="hidden sm:inline">Clear</span>
         </Button>
-        <Button onClick={handleZoomIn} variant="outline" size="sm">
+        <Button onClick={handleZoomIn} variant="outline" size="sm" className="flex-1 sm:flex-none">
           <ZoomIn className="h-4 w-4" />
         </Button>
-        <Button onClick={handleZoomOut} variant="outline" size="sm">
+        <Button onClick={handleZoomOut} variant="outline" size="sm" className="flex-1 sm:flex-none">
           <ZoomOut className="h-4 w-4" />
         </Button>
       </div>
-      <div className="border border-border rounded-lg overflow-hidden shadow-lg">
-        <canvas ref={canvasRef} />
+      <div className="border border-border rounded-lg overflow-hidden shadow-lg w-full">
+        <canvas ref={canvasRef} className="max-w-full" />
       </div>
     </div>
   );

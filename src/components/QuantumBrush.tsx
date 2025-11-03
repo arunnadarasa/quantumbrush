@@ -248,13 +248,13 @@ const QuantumBrush = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
       {/* Hero Section */}
       <div 
-        className="relative h-[30vh] bg-cover bg-center"
+        className="relative h-[20vh] md:h-[30vh] bg-cover bg-center"
         style={{ backgroundImage: `url(${quantumHero})` }}
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         <div className="relative h-full flex flex-col items-center justify-center text-white px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-2">QuantumBrush</h1>
-          <p className="text-lg md:text-xl text-center max-w-2xl">
+          <h1 className="text-3xl md:text-6xl font-bold mb-2">QuantumBrush</h1>
+          <p className="text-sm md:text-xl text-center max-w-2xl">
             Interactive quantum-powered drawing experience
           </p>
         </div>
@@ -262,14 +262,17 @@ const QuantumBrush = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-end mb-4">
+        {/* Export Button - Fixed on mobile, normal on desktop */}
+        <div className="lg:flex lg:justify-end mb-4">
           <Button
             onClick={handleExportImage}
             disabled={!fabricCanvas || strokes.length === 0}
             size="lg"
+            className="fixed bottom-4 right-4 z-50 lg:relative lg:bottom-auto lg:right-auto shadow-lg"
           >
             <Download className="mr-2 h-4 w-4" />
-            Export Image
+            <span className="hidden sm:inline">Export Image</span>
+            <span className="sm:hidden">Export</span>
           </Button>
         </div>
 
