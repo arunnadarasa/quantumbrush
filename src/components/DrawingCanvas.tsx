@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { Canvas as FabricCanvas, PencilBrush, FabricImage } from 'fabric';
+import { Canvas as FabricCanvas, PencilBrush, FabricImage, Path } from 'fabric';
 import { Button } from '@/components/ui/button';
 import { Upload, Eraser, ZoomIn, ZoomOut } from 'lucide-react';
 
 interface DrawingCanvasProps {
   imageUrl: string | null;
   brushSize: number;
-  onStrokeComplete: (path: [number, number][], clicks: [number, number][]) => void;
+  onStrokeComplete: (path: [number, number][], clicks: [number, number][], fabricPath: Path) => void;
   isDrawingMode: boolean;
   onImageLoad: (canvas: FabricCanvas) => void;
 }
@@ -21,7 +21,11 @@ export const DrawingCanvas = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [fabricCanvas, setFabricCanvas] = useState<FabricCanvas | null>(null);
   const [clicks, setClicks] = useState<[number, number][]>([]);
+  const [strokeCount, setStrokeCount] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Color palette for different strokes
+  const STROKE_COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -33,7 +37,7 @@ export const DrawingCanvas = ({
     });
 
     const brush = new PencilBrush(canvas);
-    brush.color = '#FF0000';
+    brush.color = STROKE_COLORS[0];
     brush.width = brushSize;
     canvas.freeDrawingBrush = brush;
 
@@ -53,8 +57,11 @@ export const DrawingCanvas = ({
     if (!fabricCanvas) return;
     if (fabricCanvas.freeDrawingBrush) {
       fabricCanvas.freeDrawingBrush.width = brushSize;
+      // Update brush color for next stroke
+      const colorIndex = strokeCount % STROKE_COLORS.length;
+      fabricCanvas.freeDrawingBrush.color = STROKE_COLORS[colorIndex];
     }
-  }, [fabricCanvas, brushSize]);
+  }, [fabricCanvas, brushSize, strokeCount]);
 
   useEffect(() => {
     if (!fabricCanvas || !imageUrl) return;
@@ -104,11 +111,22 @@ export const DrawingCanvas = ({
       }
 
       if (pathCoords.length > 0) {
-        onStrokeComplete(pathCoords, clicks);
+        // Style the path to remain visible
+        const colorIndex = strokeCount % STROKE_COLORS.length;
+        path.set({
+          stroke: STROKE_COLORS[colorIndex],
+          strokeWidth: 3,
+          opacity: 0.7,
+          selectable: false,
+          evented: false,
+        });
+        
+        fabricCanvas.renderAll();
+        
+        onStrokeComplete(pathCoords, clicks, path);
         setClicks([]);
+        setStrokeCount(prev => prev + 1);
       }
-
-      fabricCanvas.remove(path);
     };
 
     fabricCanvas.on('mouse:down', handleMouseDown);

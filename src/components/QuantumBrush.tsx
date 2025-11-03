@@ -50,7 +50,7 @@ const QuantumBrush = () => {
     }
   };
 
-  const handleStrokeComplete = (path: [number, number][], clicks: [number, number][]) => {
+  const handleStrokeComplete = (path: [number, number][], clicks: [number, number][], fabricPath: any) => {
     if (!fabricCanvas) return;
 
     const newStroke: StrokeData = {
@@ -61,13 +61,14 @@ const QuantumBrush = () => {
       userInput: { ...parameters },
       status: 'created',
       timestamp: Date.now(),
+      fabricPath,
     };
 
     setStrokes(prev => [...prev, newStroke]);
     
     toast({
       title: "Stroke created",
-      description: `${selectedEffect} stroke ready to process`,
+      description: `${selectedEffect} stroke ready to process (${path.length} points)`,
     });
   };
 
@@ -85,11 +86,30 @@ const QuantumBrush = () => {
       // Get canvas as base64
       const imageData = fabricCanvas.toDataURL({ format: 'png', multiplier: 1 });
 
+      console.log('🎨 Processing stroke:', {
+        strokeId,
+        effect: stroke.effectName,
+        pathLength: stroke.path.length,
+        clicksLength: stroke.clicks.length,
+        userInput: stroke.userInput,
+        imageDataLength: imageData.length,
+      });
+
+      const startTime = Date.now();
+      
       const resultBlob = await quantumBrushAPI.applyStrokeEffect(stroke.effectName, {
         image: imageData,
         path: stroke.path,
         clicks: stroke.clicks,
         userInput: stroke.userInput,
+      });
+
+      const processingTime = Date.now() - startTime;
+      console.log('✅ Stroke processed successfully:', {
+        strokeId,
+        processingTime: `${processingTime}ms`,
+        blobSize: resultBlob.size,
+        blobType: resultBlob.type,
       });
 
       const resultUrl = URL.createObjectURL(resultBlob);
@@ -102,10 +122,16 @@ const QuantumBrush = () => {
 
       toast({
         title: "Stroke processed",
-        description: `${stroke.effectName} effect applied successfully`,
+        description: `${stroke.effectName} effect applied in ${processingTime}ms`,
       });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+      
+      console.error('❌ Stroke processing failed:', {
+        strokeId,
+        error: errorMessage,
+        fullError: error,
+      });
       
       setStrokes(prev =>
         prev.map(s =>
@@ -157,6 +183,14 @@ const QuantumBrush = () => {
   };
 
   const handleDeleteStroke = (strokeId: string) => {
+    const stroke = strokes.find(s => s.id === strokeId);
+    
+    // Remove the path from canvas if it exists
+    if (stroke?.fabricPath && fabricCanvas) {
+      fabricCanvas.remove(stroke.fabricPath);
+      fabricCanvas.renderAll();
+    }
+    
     setStrokes(prev => prev.filter(s => s.id !== strokeId));
     toast({
       title: "Stroke deleted",

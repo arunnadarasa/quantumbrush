@@ -1,3 +1,5 @@
+import { Path } from 'fabric';
+
 export interface StrokeData {
   id: string;
   effectName: string;
@@ -8,6 +10,7 @@ export interface StrokeData {
   resultUrl?: string;
   timestamp: number;
   errorMessage?: string;
+  fabricPath?: Path; // Reference to the drawn path on canvas
 }
 
 export interface EffectParameters {
