@@ -160,14 +160,19 @@ const QuantumBrush = () => {
       const compositeUrl = await compositeStrokeResult(currentImage, stroke.resultUrl);
 
       // Load composite back to canvas
-      FabricImage.fromURL(compositeUrl).then((img) => {
-        if (img) {
-          img.scaleToWidth(fabricCanvas.width!);
-          img.scaleToHeight(fabricCanvas.height!);
-          fabricCanvas.backgroundImage = img;
-          fabricCanvas.renderAll();
-        }
-      });
+      FabricImage.fromURL(compositeUrl)
+        .then((img) => {
+          if (img) {
+            img.scaleToWidth(fabricCanvas.width!);
+            img.scaleToHeight(fabricCanvas.height!);
+            fabricCanvas.backgroundImage = img;
+            fabricCanvas.renderAll();
+          }
+        })
+        .catch((error) => {
+          console.error('Failed to load composite image to canvas:', error);
+          throw new Error('Failed to apply composite to canvas');
+        });
 
       toast({
         title: "Stroke applied",

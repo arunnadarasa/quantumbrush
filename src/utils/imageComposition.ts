@@ -1,9 +1,17 @@
 export async function loadImage(url: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.crossOrigin = 'anonymous';
+    
+    // Only set crossOrigin for external URLs, not blob or data URLs
+    if (!url.startsWith('blob:') && !url.startsWith('data:')) {
+      img.crossOrigin = 'anonymous';
+    }
+    
     img.onload = () => resolve(img);
-    img.onerror = reject;
+    img.onerror = (error) => {
+      console.error('Failed to load image:', url.substring(0, 50), error);
+      reject(new Error(`Failed to load image from ${url.substring(0, 50)}...`));
+    };
     img.src = url;
   });
 }
@@ -12,26 +20,37 @@ export async function compositeStrokeResult(
   baseImageUrl: string,
   strokeResultUrl: string
 ): Promise<string> {
-  const [baseImg, strokeImg] = await Promise.all([
-    loadImage(baseImageUrl),
-    loadImage(strokeResultUrl),
-  ]);
+  try {
+    console.log('🎨 Compositing images:', {
+      baseImageType: baseImageUrl.substring(0, 30),
+      strokeResultType: strokeResultUrl.substring(0, 30),
+    });
+    
+    const [baseImg, strokeImg] = await Promise.all([
+      loadImage(baseImageUrl),
+      loadImage(strokeResultUrl),
+    ]);
 
-  const canvas = document.createElement('canvas');
-  canvas.width = baseImg.width;
-  canvas.height = baseImg.height;
-  const ctx = canvas.getContext('2d');
+    const canvas = document.createElement('canvas');
+    canvas.width = baseImg.width;
+    canvas.height = baseImg.height;
+    const ctx = canvas.getContext('2d');
 
-  if (!ctx) throw new Error('Failed to get canvas context');
+    if (!ctx) throw new Error('Failed to get canvas context');
 
-  // Draw base image
-  ctx.drawImage(baseImg, 0, 0);
+    // Draw base image
+    ctx.drawImage(baseImg, 0, 0);
 
-  // Draw stroke result with alpha blending
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.drawImage(strokeImg, 0, 0, canvas.width, canvas.height);
+    // Draw stroke result with alpha blending
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(strokeImg, 0, 0, canvas.width, canvas.height);
 
-  return canvas.toDataURL('image/png');
+    console.log('✅ Composite successful');
+    return canvas.toDataURL('image/png');
+  } catch (error) {
+    console.error('❌ Composite failed:', error);
+    throw error;
+  }
 }
 
 export async function exportCompositeImage(
