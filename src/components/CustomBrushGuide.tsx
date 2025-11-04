@@ -259,6 +259,16 @@ async def render_stroke(effect_name: str, data: StrokeData, request: Request):
               <div>
                 <h3 className="text-lg font-semibold mb-2">Step 7: Deploy to Fly.io</h3>
                 <p className="text-muted-foreground mb-3">Once tested, deploy your brush:</p>
+                <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
+                  <ExternalLink className="h-4 w-4" />
+                  <span>Don't have Fly.io CLI? </span>
+                  <a href="https://fly.io/docs/hands-on/install-flyctl/" 
+                     target="_blank" 
+                     rel="noopener noreferrer" 
+                     className="hover:underline text-primary">
+                    Install flyctl
+                  </a>
+                </div>
                 <CodeBlock
                   id="deploy"
                   code={`cd ~/QuantumBrush
@@ -267,12 +277,6 @@ git commit -m "Add myCustomBrush effect"
 git push origin main
 flyctl deploy`}
                 />
-                <div className="flex items-center gap-2 mt-3 text-sm text-muted-foreground">
-                  <ExternalLink className="h-4 w-4" />
-                  <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                    Fly.io Documentation
-                  </a>
-                </div>
               </div>
 
               <div>
