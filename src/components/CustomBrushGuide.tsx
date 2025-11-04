@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Copy, Check, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
@@ -26,14 +25,14 @@ export const CustomBrushGuide = () => {
       >
         {copiedCode === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
-    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto max-h-[500px] text-xs sm:text-sm">
+    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto max-h-[60vh] text-xs sm:text-sm">
       <code className="font-mono">{code}</code>
     </pre>
     </div>
   );
 
   return (
-    <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+    <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
       <DialogHeader>
         <DialogTitle className="text-2xl">Create Your Own Quantum Brush</DialogTitle>
         <DialogDescription>
@@ -41,7 +40,7 @@ export const CustomBrushGuide = () => {
         </DialogDescription>
       </DialogHeader>
 
-      <Tabs defaultValue="getting-started" className="flex-1 overflow-hidden flex flex-col">
+      <Tabs defaultValue="getting-started" className="flex flex-col">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="getting-started">Getting Started</TabsTrigger>
           <TabsTrigger value="implementation">Implementation</TabsTrigger>
@@ -49,7 +48,7 @@ export const CustomBrushGuide = () => {
           <TabsTrigger value="ideas">Ideas</TabsTrigger>
         </TabsList>
 
-        <ScrollArea className="flex-1 mt-4 pr-4 min-h-0">
+        <div className="mt-4 pr-4">
           {/* Tab 1: Getting Started */}
           <TabsContent value="getting-started" className="space-y-6 mt-0 pb-8">
             <div className="space-y-4">
@@ -370,7 +369,7 @@ flyctl deploy`}
               </div>
             </div>
           </TabsContent>
-        </ScrollArea>
+        </div>
       </Tabs>
     </DialogContent>
   );
