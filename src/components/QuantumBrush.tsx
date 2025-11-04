@@ -167,6 +167,12 @@ const QuantumBrush = () => {
             img.scaleToHeight(fabricCanvas.height!);
             fabricCanvas.backgroundImage = img;
             fabricCanvas.renderAll();
+            
+            // Hide the preview stroke path after applying the processed effect
+            if (stroke.fabricPath) {
+              stroke.fabricPath.visible = false;
+              fabricCanvas.requestRenderAll();
+            }
           }
         })
         .catch((error) => {
