@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Canvas as FabricCanvas, FabricImage } from 'fabric';
 import { DrawingCanvas } from '@/components/DrawingCanvas';
 import { EffectControlPanel } from '@/components/EffectControlPanel';
@@ -229,13 +229,16 @@ const QuantumBrush = () => {
       });
     }
   };
-  const handleImageLoad = (canvas: FabricCanvas) => {
+  const handleImageLoad = useCallback((canvas: FabricCanvas) => {
     setFabricCanvas(canvas);
-    setBaseImageUrl(canvas.toDataURL({
-      format: 'png',
-      multiplier: 1
-    }));
-  };
+    // Only set baseImageUrl on initial load, not when applying composites
+    if (!baseImageUrl) {
+      setBaseImageUrl(canvas.toDataURL({
+        format: 'png',
+        multiplier: 1
+      }));
+    }
+  }, [baseImageUrl]);
   return <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
       {/* Hero Section */}
       <div className="relative h-[20vh] md:h-[30vh] bg-cover bg-center" style={{

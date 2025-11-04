@@ -96,7 +96,7 @@ export const DrawingCanvas = ({
         onImageLoad(fabricCanvas);
       }
     });
-  }, [fabricCanvas, imageUrl, onImageLoad]);
+  }, [fabricCanvas, imageUrl]);
 
   useEffect(() => {
     if (!fabricCanvas) return;
