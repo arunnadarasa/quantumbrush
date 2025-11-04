@@ -49,9 +49,9 @@ export const CustomBrushGuide = () => {
           <TabsTrigger value="ideas">Ideas</TabsTrigger>
         </TabsList>
 
-        <ScrollArea className="flex-1 mt-4 pr-4">
+        <ScrollArea className="flex-1 mt-4 pr-4 h-[calc(90vh-240px)]">
           {/* Tab 1: Getting Started */}
-          <TabsContent value="getting-started" className="space-y-6 mt-0">
+          <TabsContent value="getting-started" className="space-y-6 mt-0 pb-8">
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold mb-2">Step 1: Understand the Structure</h3>
@@ -85,7 +85,7 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
           </TabsContent>
 
           {/* Tab 2: Implementation */}
-          <TabsContent value="implementation" className="space-y-6 mt-0">
+          <TabsContent value="implementation" className="space-y-6 mt-0 pb-8">
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
@@ -222,7 +222,7 @@ python test_brush.py`}
           </TabsContent>
 
           {/* Tab 3: Integration */}
-          <TabsContent value="integration" className="space-y-6 mt-0">
+          <TabsContent value="integration" className="space-y-6 mt-0 pb-8">
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold mb-2">Step 6: Register in Backend</h3>
@@ -287,7 +287,7 @@ flyctl deploy`}
           </TabsContent>
 
           {/* Tab 4: Ideas & Examples */}
-          <TabsContent value="ideas" className="space-y-6 mt-0">
+          <TabsContent value="ideas" className="space-y-6 mt-0 pb-8">
             <div className="space-y-4">
               <div>
                 <h3 className="text-xl font-semibold mb-4">Custom Brush Ideas</h3>
