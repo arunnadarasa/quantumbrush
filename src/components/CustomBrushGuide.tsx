@@ -85,9 +85,9 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
           </TabsContent>
 
           {/* Tab 2: Implementation */}
-          <TabsContent value="implementation" className="space-y-6 mt-0 pb-8">
-            <div className="space-y-4">
-              <div>
+          <TabsContent value="implementation" className="space-y-8 mt-0 pb-16">
+            <div className="space-y-8">
+              <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
                 <p className="text-muted-foreground mb-3">Create <code className="bg-muted px-1 py-0.5 rounded text-xs">myCustomBrush.py</code>:</p>
                 <CodeBlock
@@ -155,7 +155,7 @@ if __name__ == "__main__":
                 />
               </div>
 
-              <div>
+              <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-2">Step 5: Create Requirements File</h3>
                 <p className="text-muted-foreground mb-3">Create <code className="bg-muted px-1 py-0.5 rounded text-xs">myCustomBrush_requirements.json</code>:</p>
                 <CodeBlock
@@ -184,7 +184,7 @@ if __name__ == "__main__":
                 />
               </div>
 
-              <div>
+              <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-2">Test Your Brush Locally</h3>
                 <p className="text-muted-foreground mb-3">Create a test script:</p>
                 <CodeBlock
