@@ -3,8 +3,10 @@ import { Canvas as FabricCanvas, FabricImage } from 'fabric';
 import { DrawingCanvas } from '@/components/DrawingCanvas';
 import { EffectControlPanel } from '@/components/EffectControlPanel';
 import { StrokeManager } from '@/components/StrokeManager';
+import { CustomBrushGuide } from '@/components/CustomBrushGuide';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import { Download, Sparkles } from 'lucide-react';
 import { quantumBrushAPI } from '@/services/quantumBrush';
 import { useToast } from '@/hooks/use-toast';
 import { StrokeData, EffectParameters, DEFAULT_PARAMETERS } from '@/types/stroke';
@@ -255,8 +257,19 @@ const QuantumBrush = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
-        {/* Export Button - Fixed on mobile, normal on desktop */}
-        <div className="lg:flex lg:justify-end mb-4">
+        {/* Action Buttons - Fixed on mobile, normal on desktop */}
+        <div className="lg:flex lg:justify-end lg:gap-3 mb-4">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="lg" variant="outline" className="w-full lg:w-auto mb-2 lg:mb-0">
+                <Sparkles className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">Create Your Own Brush</span>
+                <span className="sm:hidden">Custom Brush</span>
+              </Button>
+            </DialogTrigger>
+            <CustomBrushGuide />
+          </Dialog>
+          
           <Button onClick={handleExportImage} disabled={!fabricCanvas || strokes.length === 0} size="lg" className="fixed bottom-4 right-4 z-50 lg:relative lg:bottom-auto lg:right-auto shadow-lg">
             <Download className="mr-2 h-4 w-4" />
             <span className="hidden sm:inline">Export Image</span>
