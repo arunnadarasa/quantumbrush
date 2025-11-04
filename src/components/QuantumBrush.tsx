@@ -155,6 +155,9 @@ const QuantumBrush = () => {
           fabricCanvas.backgroundImage = img;
           fabricCanvas.renderAll();
 
+          // Persist the composite as the new base image
+          setBaseImageUrl(compositeUrl);
+
           // Hide the preview stroke path after applying the processed effect
           if (stroke.fabricPath) {
             stroke.fabricPath.visible = false;
