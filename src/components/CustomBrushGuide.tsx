@@ -25,7 +25,7 @@ export const CustomBrushGuide = () => {
       >
         {copiedCode === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
-    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-auto max-h-[60vh] text-xs sm:text-sm">
+    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs sm:text-sm">
       <code className="font-mono">{code}</code>
     </pre>
     </div>
