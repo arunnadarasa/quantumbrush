@@ -67,6 +67,16 @@ export const CustomBrushGuide = () => {
               <div>
                 <h3 className="text-lg font-semibold mb-2">Step 2: Create the Brush Folder</h3>
                 <p className="text-muted-foreground mb-3">In WSL, run:</p>
+                <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
+                  <ExternalLink className="h-4 w-4" />
+                  <span>Don't have WSL? </span>
+                  <a href="https://docs.microsoft.com/en-us/windows/wsl/install" 
+                     target="_blank" 
+                     rel="noopener noreferrer" 
+                     className="hover:underline text-primary">
+                    Install WSL
+                  </a>
+                </div>
                 <CodeBlock
                   id="create-folder"
                   code={`mkdir -p ~/QuantumBrush/effect/myCustomBrush
