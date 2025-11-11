@@ -20,7 +20,7 @@ export const RepositoryLinks = () => {
   };
 
   return (
-    <DialogContent className="max-w-[90vw] sm:max-w-2xl lg:max-w-3xl p-3 sm:p-6">
+    <DialogContent className="max-w-[90vw] sm:max-w-2xl lg:max-w-3xl p-3 sm:p-6 max-h-[90vh] flex flex-col">
       <DialogHeader>
         <DialogTitle className="text-xl sm:text-2xl mb-1 sm:mb-0">Quantum Brush Resources</DialogTitle>
         <DialogDescription className="text-xs sm:text-base">
@@ -28,7 +28,7 @@ export const RepositoryLinks = () => {
         </DialogDescription>
       </DialogHeader>
 
-      <div className="space-y-2.5 sm:space-y-4 mt-2 sm:mt-4">
+      <div className="space-y-2.5 sm:space-y-4 mt-2 sm:mt-4 overflow-y-auto max-h-[calc(90vh-140px)] pr-1 scroll-smooth">
         {/* Backend Repo Card */}
         <div className="border border-l-4 border-l-accent-blue rounded-lg p-3 sm:p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
           <div className="flex flex-col gap-2 sm:gap-3">
