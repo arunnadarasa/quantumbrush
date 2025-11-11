@@ -20,7 +20,7 @@ export const RepositoryLinks = () => {
   };
 
   return (
-    <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-3xl p-3 sm:p-6">
+    <DialogContent className="max-w-[90vw] sm:max-w-2xl lg:max-w-3xl p-3 sm:p-6">
       <DialogHeader>
         <DialogTitle className="text-xl sm:text-2xl mb-1 sm:mb-0">Quantum Brush Resources</DialogTitle>
         <DialogDescription className="text-xs sm:text-base">
