@@ -43,17 +43,16 @@ export const CustomBrushGuide = () => {
       </DialogHeader>
 
       <Tabs defaultValue="getting-started" className="flex flex-col">
-        <TabsList className="flex overflow-x-auto sm:grid sm:grid-cols-4 gap-1 pb-1">
-          <TabsTrigger value="getting-started" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[80px]">
-            <span className="hidden sm:inline">Getting Started</span>
-            <span className="sm:hidden">Start</span>
+        <TabsList className="flex flex-col sm:grid sm:grid-cols-4 gap-1 w-full sm:w-auto">
+          <TabsTrigger value="getting-started" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">
+            Getting Started
           </TabsTrigger>
-          <TabsTrigger value="implementation" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[100px]">Implementation</TabsTrigger>
-          <TabsTrigger value="integration" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[100px]">Integration</TabsTrigger>
-          <TabsTrigger value="ideas" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[80px]">Ideas</TabsTrigger>
+          <TabsTrigger value="implementation" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">Implementation</TabsTrigger>
+          <TabsTrigger value="integration" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">Integration</TabsTrigger>
+          <TabsTrigger value="ideas" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">Ideas</TabsTrigger>
         </TabsList>
 
-        <div className="mt-4">
+        <div className="mt-3 sm:mt-4">
           {/* Tab 1: Getting Started */}
           <TabsContent value="getting-started" className="space-y-4 sm:space-y-6 mt-0 pb-6 sm:pb-8">
             <div className="space-y-4">
