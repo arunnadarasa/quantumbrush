@@ -20,24 +20,24 @@ export const RepositoryLinks = () => {
   };
 
   return (
-    <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-3xl p-4 sm:p-6">
+    <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-3xl p-3 sm:p-6">
       <DialogHeader>
-        <DialogTitle className="text-xl sm:text-2xl">Quantum Brush Resources</DialogTitle>
-        <DialogDescription className="text-sm sm:text-base">
+        <DialogTitle className="text-xl sm:text-2xl mb-1 sm:mb-0">Quantum Brush Resources</DialogTitle>
+        <DialogDescription className="text-xs sm:text-base">
           Access the source code and live microservice
         </DialogDescription>
       </DialogHeader>
 
-      <div className="space-y-4 mt-4">
+      <div className="space-y-2.5 sm:space-y-4 mt-2 sm:mt-4">
         {/* Backend Repo Card */}
-        <div className="border border-l-4 border-l-accent-blue rounded-lg p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
-          <div className="flex flex-col gap-3">
+        <div className="border border-l-4 border-l-accent-blue rounded-lg p-3 sm:p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
+          <div className="flex flex-col gap-2 sm:gap-3">
             <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-base sm:text-lg mb-2">🔧 Backend Repository</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3 break-words">
+              <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">🔧 Backend Repository</h4>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 sm:mb-3 break-words hidden sm:block">
                 Python FastAPI backend with custom brush effects and Fly.io deployment
               </p>
-              <div className="flex items-center gap-2 bg-muted px-3 py-2 rounded-md">
+              <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
                 <span className="text-xs truncate flex-1 min-w-0">
                   https://github.com/arunnadarasa/quantum-brush-backend
                 </span>
@@ -70,14 +70,14 @@ export const RepositoryLinks = () => {
         </div>
 
         {/* Frontend Repo Card */}
-        <div className="border border-l-4 border-l-accent-purple rounded-lg p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
-          <div className="flex flex-col gap-3">
+        <div className="border border-l-4 border-l-accent-purple rounded-lg p-3 sm:p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
+          <div className="flex flex-col gap-2 sm:gap-3">
             <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-base sm:text-lg mb-2">🎨 Frontend Repository</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3 break-words">
+              <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">🎨 Frontend Repository</h4>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 sm:mb-3 break-words hidden sm:block">
                 React + TypeScript frontend built with Lovable, featuring quantum brush UI and canvas integration
               </p>
-              <div className="flex items-center gap-2 bg-muted px-3 py-2 rounded-md">
+              <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
                 <span className="text-xs truncate flex-1 min-w-0">
                   https://github.com/arunnadarasa/quantumbrush
                 </span>
@@ -110,14 +110,14 @@ export const RepositoryLinks = () => {
         </div>
 
         {/* Live Microservice Card */}
-        <div className="border border-l-4 border-l-accent-green rounded-lg p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
-          <div className="flex flex-col gap-3">
+        <div className="border border-l-4 border-l-accent-green rounded-lg p-3 sm:p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
+          <div className="flex flex-col gap-2 sm:gap-3">
             <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-base sm:text-lg mb-2">🚀 Live Microservice</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3 break-words">
+              <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">🚀 Live Microservice</h4>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 sm:mb-3 break-words hidden sm:block">
                 Python microservice deployed on Fly.io for real-time brush effect processing
               </p>
-              <div className="flex items-center gap-2 bg-muted px-3 py-2 rounded-md">
+              <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
                 <span className="text-xs truncate flex-1 min-w-0">
                   https://quantumbrush.fly.dev
                 </span>
