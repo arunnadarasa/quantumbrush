@@ -43,6 +43,11 @@ All colors MUST be HSL.
     --quantum-purple: 263 70% 50%;
     --quantum-deep: 222 47% 11%;
     
+    /* Accent colors for repository cards */
+    --accent-blue: 217 91% 60%;
+    --accent-purple: 263 70% 50%;
+    --accent-green: 142 76% 36%;
+    
     /* Gradients */
     --gradient-quantum: linear-gradient(135deg, hsl(189 97% 55% / 0.2), hsl(263 70% 50% / 0.2));
     --gradient-glow: linear-gradient(180deg, hsl(189 97% 55% / 0.1), transparent);
