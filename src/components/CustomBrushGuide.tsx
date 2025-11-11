@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Copy, Check, ExternalLink } from 'lucide-react';
+import { Copy, Check, ExternalLink, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const CustomBrushGuide = () => {
@@ -20,21 +21,21 @@ export const CustomBrushGuide = () => {
       <Button
         size="sm"
         variant="ghost"
-        className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute top-2 right-2 z-10 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity bg-gray-800/90 sm:bg-transparent hover:bg-gray-700"
         onClick={() => copyToClipboard(code, id)}
       >
         {copiedCode === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
       <div className="overflow-x-auto w-full">
-        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs sm:text-sm whitespace-pre">
-          <code className="font-mono">{code}</code>
+        <pre className="bg-gray-900 text-gray-100 p-3 sm:p-4 rounded-lg text-sm whitespace-pre">
+          <code className="font-mono leading-relaxed">{code}</code>
         </pre>
       </div>
     </div>
   );
 
   return (
-    <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+    <DialogContent className="max-w-[90vw] sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl max-h-[90vh] overflow-y-auto p-3 sm:p-6">
       <DialogHeader>
         <DialogTitle className="text-xl sm:text-2xl">Create Your Own Quantum Brush</DialogTitle>
         <DialogDescription className="text-sm sm:text-base">
@@ -54,47 +55,68 @@ export const CustomBrushGuide = () => {
 
         <div className="mt-3 sm:mt-4">
           {/* Tab 1: Getting Started */}
-          <TabsContent value="getting-started" className="space-y-4 sm:space-y-6 mt-0 pb-6 sm:pb-8">
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 1: Understand the Structure</h3>
-                <p className="text-muted-foreground mb-3 break-words">
-                  Your brush needs to be placed in: <code className="bg-muted px-2 py-1 rounded text-xs break-all">$HOME/QuantumBrush/effect/yourBrushName/</code>
-                </p>
-                <p className="text-muted-foreground break-words">It should contain:</p>
-                <ul className="list-disc list-inside text-muted-foreground ml-4 mt-2 space-y-1">
-                  <li><code className="bg-muted px-1 py-0.5 rounded text-xs break-all">yourBrushName.py</code> - Main brush logic</li>
-                  <li><code className="bg-muted px-1 py-0.5 rounded text-xs break-all">yourBrushName_requirements.json</code> - Dependencies</li>
-                </ul>
-              </div>
+          <TabsContent value="getting-started" className="space-y-3 sm:space-y-4 mt-0 pb-6 sm:pb-8">
+            <Accordion type="single" collapsible defaultValue="step-1" className="w-full">
+              <AccordionItem value="step-1" className="border rounded-lg px-3 sm:px-4 mb-2">
+                <AccordionTrigger className="text-sm sm:text-base font-semibold hover:no-underline py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">1</span>
+                    <span>Understand the Structure</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-2 pb-3 space-y-3">
+                  <p className="text-sm text-muted-foreground break-words">
+                    Your brush needs to be placed in: <code className="bg-muted px-2 py-1 rounded text-xs break-all">$HOME/QuantumBrush/effect/yourBrushName/</code>
+                  </p>
+                  <p className="text-sm text-muted-foreground break-words">It should contain:</p>
+                  <ul className="list-disc list-inside text-sm text-muted-foreground ml-4 space-y-1">
+                    <li><code className="bg-muted px-1 py-0.5 rounded text-xs break-all">yourBrushName.py</code> - Main brush logic</li>
+                    <li><code className="bg-muted px-1 py-0.5 rounded text-xs break-all">yourBrushName_requirements.json</code> - Dependencies</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
 
-              <div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 2: Create the Brush Folder</h3>
-                <p className="text-muted-foreground mb-3 break-words">In WSL, run:</p>
-                <div className="flex flex-wrap items-center gap-2 mb-3 text-sm text-muted-foreground">
-                  <ExternalLink className="h-4 w-4 flex-shrink-0" />
-                  <span>Don't have WSL? </span>
-                  <a href="https://docs.microsoft.com/en-us/windows/wsl/install" 
-                     target="_blank" 
-                     rel="noopener noreferrer" 
-                     className="hover:underline text-primary">
-                    Install WSL
-                  </a>
-                </div>
-                <CodeBlock
-                  id="create-folder"
-                  code={`mkdir -p ~/QuantumBrush/effect/myCustomBrush
+              <AccordionItem value="step-2" className="border rounded-lg px-3 sm:px-4 mb-2">
+                <AccordionTrigger className="text-sm sm:text-base font-semibold hover:no-underline py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">2</span>
+                    <span>Create the Brush Folder</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-2 pb-3 space-y-3">
+                  <p className="text-sm text-muted-foreground break-words">In WSL, run:</p>
+                  <div className="flex flex-wrap items-center gap-2 mb-2 text-xs sm:text-sm text-muted-foreground">
+                    <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                    <span>Don't have WSL? </span>
+                    <a href="https://docs.microsoft.com/en-us/windows/wsl/install" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       className="inline-flex items-center hover:underline text-primary font-medium min-h-[44px] sm:min-h-0 -my-2 sm:my-0">
+                      Install WSL
+                    </a>
+                  </div>
+                  <CodeBlock
+                    id="create-folder"
+                    code={`mkdir -p ~/QuantumBrush/effect/myCustomBrush
 cd ~/QuantumBrush/effect/myCustomBrush`}
-                />
-              </div>
+                  />
+                </AccordionContent>
+              </AccordionItem>
 
-              <div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 3: File Setup Basics</h3>
-                <p className="text-muted-foreground break-words">
-                  You'll create two main files that define your brush's behavior and parameters. The Python file contains the effect logic, while the JSON file specifies dependencies and user-adjustable parameters.
-                </p>
-              </div>
-            </div>
+              <AccordionItem value="step-3" className="border rounded-lg px-3 sm:px-4">
+                <AccordionTrigger className="text-sm sm:text-base font-semibold hover:no-underline py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">3</span>
+                    <span>File Setup Basics</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-2 pb-3">
+                  <p className="text-sm text-muted-foreground break-words">
+                    You'll create two main files that define your brush's behavior and parameters. The Python file contains the effect logic, while the JSON file specifies dependencies and user-adjustable parameters.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </TabsContent>
 
           {/* Tab 2: Implementation */}
@@ -102,11 +124,23 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
             <div className="space-y-6 sm:space-y-8">
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
-                <p className="text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush.py</code>:</p>
-                <CodeBlock
-                  id="main-brush"
-                  language="python"
-                  code={`import json
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush.py</code>:</p>
+                
+                <div className="space-y-2">
+                  {/* Mobile: Collapsible code */}
+                  <div className="sm:hidden">
+                    <details className="group">
+                      <summary className="cursor-pointer list-none">
+                        <div className="flex items-center justify-between p-3 bg-primary/5 rounded-lg border">
+                          <span className="text-sm font-medium">View Python Template Code</span>
+                          <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+                        </div>
+                      </summary>
+                      <div className="mt-2">
+                        <CodeBlock
+                          id="main-brush"
+                          language="python"
+                          code={`import json
 import base64
 import io
 from PIL import Image, ImageDraw, ImageFilter
@@ -165,12 +199,83 @@ if __name__ == "__main__":
     data = json.loads(sys.stdin.read())
     result = apply_effect(data['image'], data['stroke'], data['params'])
     print(json.dumps({'success': True, 'image': result}))`}
-                />
+                        />
+                      </div>
+                    </details>
+                  </div>
+                  
+                  {/* Desktop: Show directly */}
+                  <div className="hidden sm:block">
+                    <CodeBlock
+                      id="main-brush-desktop"
+                      language="python"
+                      code={`import json
+import base64
+import io
+from PIL import Image, ImageDraw, ImageFilter
+
+def apply_effect(image_data, stroke_data, params):
+    """
+    Main brush effect function
+    
+    Args:
+        image_data: base64 encoded image
+        stroke_data: {path: [[y, x], ...], radius, strength, ...}
+        params: userInput parameters from frontend
+    
+    Returns:
+        base64 encoded output image
+    """
+    
+    # Decode input image
+    img_bytes = base64.b64decode(image_data.split(',')[1] if ',' in image_data else image_data)
+    img = Image.open(io.BytesIO(img_bytes)).convert("RGBA")
+    
+    # Get parameters
+    radius = int(params.get('Radius', 20))
+    strength = float(params.get('Strength', 0.8))
+    
+    # Get stroke path (flip from [y, x] to (x, y))
+    path = [(int(x), int(y)) for y, x in stroke_data.get('path', [])]
+    
+    if len(path) < 2:
+        return None
+    
+    # Create a drawing layer
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    
+    # YOUR CUSTOM EFFECT GOES HERE
+    # Example: Draw a simple brush stroke
+    color = (255, 100, 50, int(255 * strength))  # Orange with transparency
+    draw.line(path, fill=color, width=radius, joint="curve")
+    
+    # Composite onto original image
+    result = Image.alpha_composite(img, overlay)
+    
+    # Encode output
+    output = io.BytesIO()
+    result.save(output, format="PNG")
+    output_b64 = base64.b64encode(output.getvalue()).decode('utf-8')
+    
+    return f"data:image/png;base64,{output_b64}"
+
+# Entry point for backend
+if __name__ == "__main__":
+    import sys
+    import json
+    
+    data = json.loads(sys.stdin.read())
+    result = apply_effect(data['image'], data['stroke'], data['params'])
+    print(json.dumps({'success': True, 'image': result}))`}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 5: Create Requirements File</h3>
-                <p className="text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush_requirements.json</code>:</p>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush_requirements.json</code>:</p>
                 <CodeBlock
                   id="requirements"
                   language="json"
@@ -199,7 +304,7 @@ if __name__ == "__main__":
 
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Test Your Brush Locally</h3>
-                <p className="text-muted-foreground mb-3 break-words">Create a test script:</p>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Create a test script:</p>
                 <CodeBlock
                   id="test-script"
                   code={`cat > ~/QuantumBrush/effect/myCustomBrush/test_brush.py << 'EOF'
@@ -239,7 +344,7 @@ python test_brush.py`}
             <div className="space-y-4">
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 6: Register in Backend</h3>
-                <p className="text-muted-foreground mb-3 break-words">Update your <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">main.py</code> to load custom brushes:</p>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Update your <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">main.py</code> to load custom brushes:</p>
                 <CodeBlock
                   id="backend-register"
                   language="python"
@@ -262,14 +367,14 @@ async def render_stroke(effect_name: str, data: StrokeData, request: Request):
 
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 7: Deploy to Fly.io</h3>
-                <p className="text-muted-foreground mb-3 break-words">Once tested, deploy your brush:</p>
-                <div className="flex flex-wrap items-center gap-2 mb-3 text-sm text-muted-foreground">
-                  <ExternalLink className="h-4 w-4 flex-shrink-0" />
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Once tested, deploy your brush:</p>
+                <div className="flex flex-wrap items-center gap-2 mb-3 text-xs sm:text-sm text-muted-foreground">
+                  <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                   <span>Don't have Fly.io CLI? </span>
                   <a href="https://fly.io/docs/hands-on/install-flyctl/" 
                      target="_blank" 
                      rel="noopener noreferrer" 
-                     className="hover:underline text-primary">
+                     className="inline-flex items-center hover:underline text-primary font-medium min-h-[44px] sm:min-h-0 -my-2 sm:my-0">
                     Install flyctl
                   </a>
                 </div>
@@ -308,14 +413,14 @@ flyctl deploy`}
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-4">Custom Brush Ideas</h3>
-                <p className="text-muted-foreground mb-6 break-words">
+                <p className="text-sm sm:text-base text-muted-foreground mb-6 break-words">
                   Here are five creative brush effects you can implement:
                 </p>
               </div>
 
               <div className="space-y-6">
                 <div className="border rounded-lg p-4 bg-card">
-                  <h4 className="font-semibold text-lg mb-2">🎮 Pixel Art Brush</h4>
+                  <h4 className="font-semibold text-base sm:text-lg mb-2">🎮 Pixel Art Brush</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Creates retro pixel art effects by pixelating the stroke area with a limited color palette.
                   </p>
@@ -327,7 +432,7 @@ flyctl deploy`}
                 </div>
 
                 <div className="border rounded-lg p-4 bg-card">
-                  <h4 className="font-semibold text-lg mb-2">💧 Watercolor Brush</h4>
+                  <h4 className="font-semibold text-base sm:text-lg mb-2">💧 Watercolor Brush</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Simulates realistic watercolor painting with transparency falloff and splatter effects.
                   </p>
@@ -339,7 +444,7 @@ flyctl deploy`}
                 </div>
 
                 <div className="border rounded-lg p-4 bg-card">
-                  <h4 className="font-semibold text-lg mb-2">🎨 Oil Paint Brush</h4>
+                  <h4 className="font-semibold text-base sm:text-lg mb-2">🎨 Oil Paint Brush</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Creates thick, textured strokes like traditional oil painting with visible brush marks.
                   </p>
@@ -351,7 +456,7 @@ flyctl deploy`}
                 </div>
 
                 <div className="border rounded-lg p-4 bg-card">
-                  <h4 className="font-semibold text-lg mb-2">✨ Glow Brush</h4>
+                  <h4 className="font-semibold text-base sm:text-lg mb-2">✨ Glow Brush</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Adds luminous, glowing effects with colorful halos around the stroke path.
                   </p>
@@ -363,7 +468,7 @@ flyctl deploy`}
                 </div>
 
                 <div className="border rounded-lg p-4 bg-card">
-                  <h4 className="font-semibold text-lg mb-2">⚡ Glitch Brush</h4>
+                  <h4 className="font-semibold text-base sm:text-lg mb-2">⚡ Glitch Brush</h4>
                   <p className="text-sm text-muted-foreground mb-3">
                     Creates digital distortion effects with RGB channel shifts and pixel displacement.
                   </p>
