@@ -38,8 +38,9 @@ export const RepositoryLinks = () => {
                 Python FastAPI backend with custom brush effects and Fly.io deployment
               </p>
               <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
-                <span className="text-xs truncate flex-1 min-w-0">
-                  https://github.com/arunnadarasa/quantum-brush-backend
+                <span className="text-xs flex-1 min-w-0">
+                  <span className="sm:hidden">github.com/.../quantum-brush-backend</span>
+                  <span className="hidden sm:inline truncate">https://github.com/arunnadarasa/quantum-brush-backend</span>
                 </span>
                 <Button
                   size="sm"
@@ -78,8 +79,9 @@ export const RepositoryLinks = () => {
                 React + TypeScript frontend built with Lovable, featuring quantum brush UI and canvas integration
               </p>
               <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
-                <span className="text-xs truncate flex-1 min-w-0">
-                  https://github.com/arunnadarasa/quantumbrush
+                <span className="text-xs flex-1 min-w-0">
+                  <span className="sm:hidden">github.com/.../quantumbrush</span>
+                  <span className="hidden sm:inline truncate">https://github.com/arunnadarasa/quantumbrush</span>
                 </span>
                 <Button
                   size="sm"
@@ -118,8 +120,9 @@ export const RepositoryLinks = () => {
                 Python microservice deployed on Fly.io for real-time brush effect processing
               </p>
               <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
-                <span className="text-xs truncate flex-1 min-w-0">
-                  https://quantumbrush.fly.dev
+                <span className="text-xs flex-1 min-w-0">
+                  <span className="sm:hidden">quantumbrush.fly.dev</span>
+                  <span className="hidden sm:inline truncate">https://quantumbrush.fly.dev</span>
                 </span>
                 <Button
                   size="sm"
