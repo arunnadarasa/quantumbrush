@@ -24,7 +24,7 @@ export const RepositoryLinks = () => {
       <DialogHeader>
         <DialogTitle className="text-xl sm:text-2xl mb-1 sm:mb-0">Quantum Brush Resources</DialogTitle>
         <DialogDescription className="text-xs sm:text-base">
-          Access the source code, research paper, and resources for contributors
+          Access the source code, live microservice, and contribute to the project
         </DialogDescription>
       </DialogHeader>
 
@@ -147,47 +147,6 @@ export const RepositoryLinks = () => {
               <Button size="sm" variant="outline" className="w-full sm:w-auto active:scale-95 transition-transform">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Visit
-              </Button>
-            </a>
-          </div>
-        </div>
-
-        {/* Research Paper Card */}
-        <div className="border border-l-4 border-l-orange-500 rounded-lg p-3 sm:p-4 bg-card transition-all hover:shadow-lg active:scale-[0.98]">
-          <div className="flex flex-col gap-2 sm:gap-3">
-            <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">📄 Research Paper</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 sm:mb-3 break-words hidden sm:block">
-                Original research paper on arXiv - Learn about the quantum-inspired brush algorithms and methodology
-              </p>
-              <div className="flex items-center gap-2 bg-muted px-2 py-1.5 sm:px-3 sm:py-2 rounded-md">
-                <span className="text-xs flex-1 min-w-0">
-                  <span className="sm:hidden">arxiv.org/abs/2509.01442</span>
-                  <span className="hidden sm:inline truncate">https://arxiv.org/abs/2509.01442</span>
-                </span>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="h-7 w-7 p-0 flex-shrink-0 active:scale-95 transition-transform"
-                  onClick={() => copyToClipboard('https://arxiv.org/abs/2509.01442')}
-                >
-                  {copiedUrl === 'https://arxiv.org/abs/2509.01442' ? (
-                    <Check className="h-3.5 w-3.5 text-orange-500" />
-                  ) : (
-                    <Copy className="h-3.5 w-3.5" />
-                  )}
-                </Button>
-              </div>
-            </div>
-            <a 
-              href="https://arxiv.org/abs/2509.01442" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="self-start sm:self-auto"
-            >
-              <Button size="sm" variant="outline" className="w-full sm:w-auto active:scale-95 transition-transform">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                Read Paper
               </Button>
             </a>
           </div>

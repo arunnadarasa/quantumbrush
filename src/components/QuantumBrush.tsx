@@ -7,7 +7,7 @@ import { CustomBrushGuide } from '@/components/CustomBrushGuide';
 import { RepositoryLinks } from '@/components/RepositoryLinks';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { Download, Sparkles, Github } from 'lucide-react';
+import { Download, Sparkles, Github, FileText } from 'lucide-react';
 import { quantumBrushAPI } from '@/services/quantumBrush';
 import { useToast } from '@/hooks/use-toast';
 import { StrokeData, EffectParameters, DEFAULT_PARAMETERS } from '@/types/stroke';
@@ -260,6 +260,20 @@ const QuantumBrush = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Action Buttons - Fixed on mobile, normal on desktop */}
         <div className="lg:flex lg:justify-end lg:gap-3 mb-4">
+          {/* Research Paper Button */}
+          <a 
+            href="https://mothquantum.com/research" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block w-full lg:w-auto mb-2 lg:mb-0"
+          >
+            <Button size="lg" variant="outline" className="w-full">
+              <FileText className="mr-2 h-4 w-4" />
+              <span className="hidden sm:inline">Research Paper</span>
+              <span className="sm:hidden">Paper</span>
+            </Button>
+          </a>
+
           <Dialog>
             <DialogTrigger asChild>
               <Button size="lg" variant="outline" className="w-full lg:w-auto mb-2 lg:mb-0">
