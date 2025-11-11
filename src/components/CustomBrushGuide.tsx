@@ -17,7 +17,7 @@ export const CustomBrushGuide = () => {
   };
 
   const CodeBlock = ({ code, id, language = 'bash' }: { code: string; id: string; language?: string }) => (
-    <div className="relative group w-full">
+    <div className="relative group w-full min-w-0">
       <Button
         size="sm"
         variant="ghost"
@@ -26,16 +26,16 @@ export const CustomBrushGuide = () => {
       >
         {copiedCode === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
-      <div className="overflow-x-auto w-full">
-        <pre className="bg-gray-900 text-gray-100 p-3 sm:p-4 rounded-lg text-sm whitespace-pre">
-          <code className="font-mono leading-relaxed">{code}</code>
+      <div className="overflow-x-auto w-full min-w-0">
+        <pre className="bg-gray-900 text-gray-100 p-3 sm:p-4 rounded-lg text-sm whitespace-pre min-w-0">
+          <code className="font-mono leading-relaxed block">{code}</code>
         </pre>
       </div>
     </div>
   );
 
   return (
-    <DialogContent className="max-w-[90vw] sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl max-h-[90vh] overflow-y-auto p-3 sm:p-6">
+    <DialogContent className="max-w-[90vw] sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl max-h-[90vh] overflow-y-auto overflow-x-hidden p-3 sm:p-6">
       <DialogHeader>
         <DialogTitle className="text-xl sm:text-2xl">Create Your Own Quantum Brush</DialogTitle>
         <DialogDescription className="text-sm sm:text-base">
@@ -43,7 +43,7 @@ export const CustomBrushGuide = () => {
         </DialogDescription>
       </DialogHeader>
 
-      <Tabs defaultValue="getting-started" className="flex flex-col">
+      <Tabs defaultValue="getting-started" className="flex flex-col w-full min-w-0">
         <TabsList className="flex flex-col sm:grid sm:grid-cols-4 gap-1 w-full sm:w-auto">
           <TabsTrigger value="getting-started" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">
             Getting Started
@@ -55,16 +55,16 @@ export const CustomBrushGuide = () => {
 
         <div className="mt-3 sm:mt-4">
           {/* Tab 1: Getting Started */}
-          <TabsContent value="getting-started" className="space-y-3 sm:space-y-4 mt-0 pb-6 sm:pb-8">
+          <TabsContent value="getting-started" className="space-y-3 sm:space-y-4 mt-0 pb-6 sm:pb-8 w-full min-w-0 overflow-hidden">
             <Accordion type="single" collapsible defaultValue="step-1" className="w-full">
-              <AccordionItem value="step-1" className="border rounded-lg px-3 sm:px-4 mb-2">
+              <AccordionItem value="step-1" className="border rounded-lg px-3 sm:px-4 mb-2 overflow-hidden">
                 <AccordionTrigger className="text-sm sm:text-base font-semibold hover:no-underline py-3">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">1</span>
                     <span>Understand the Structure</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-2 pb-3 space-y-3">
+                <AccordionContent className="pt-2 pb-3 space-y-3 w-full min-w-0">
                   <p className="text-sm text-muted-foreground break-words">
                     Your brush needs to be placed in: <code className="bg-muted px-2 py-1 rounded text-xs break-all">$HOME/QuantumBrush/effect/yourBrushName/</code>
                   </p>
@@ -76,14 +76,14 @@ export const CustomBrushGuide = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="step-2" className="border rounded-lg px-3 sm:px-4 mb-2">
+              <AccordionItem value="step-2" className="border rounded-lg px-3 sm:px-4 mb-2 overflow-hidden">
                 <AccordionTrigger className="text-sm sm:text-base font-semibold hover:no-underline py-3">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">2</span>
                     <span>Create the Brush Folder</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-2 pb-3 space-y-3">
+                <AccordionContent className="pt-2 pb-3 space-y-3 w-full min-w-0">
                   <p className="text-sm text-muted-foreground break-words">In WSL, run:</p>
                   <div className="flex flex-wrap items-center gap-2 mb-2 text-xs sm:text-sm text-muted-foreground">
                     <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
@@ -103,14 +103,14 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="step-3" className="border rounded-lg px-3 sm:px-4">
+              <AccordionItem value="step-3" className="border rounded-lg px-3 sm:px-4 overflow-hidden">
                 <AccordionTrigger className="text-sm sm:text-base font-semibold hover:no-underline py-3">
                   <div className="flex items-center gap-2">
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">3</span>
                     <span>File Setup Basics</span>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pt-2 pb-3">
+                <AccordionContent className="pt-2 pb-3 w-full min-w-0">
                   <p className="text-sm text-muted-foreground break-words">
                     You'll create two main files that define your brush's behavior and parameters. The Python file contains the effect logic, while the JSON file specifies dependencies and user-adjustable parameters.
                   </p>
@@ -120,9 +120,9 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
           </TabsContent>
 
           {/* Tab 2: Implementation */}
-          <TabsContent value="implementation" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16">
+          <TabsContent value="implementation" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16 w-full min-w-0 overflow-hidden">
             <div className="space-y-6 sm:space-y-8">
-              <div>
+              <div className="w-full min-w-0">
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush.py</code>:</p>
                 
@@ -273,7 +273,7 @@ if __name__ == "__main__":
                 </div>
               </div>
 
-              <div>
+              <div className="w-full min-w-0">
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 5: Create Requirements File</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush_requirements.json</code>:</p>
                 <CodeBlock
@@ -302,7 +302,7 @@ if __name__ == "__main__":
                 />
               </div>
 
-              <div>
+              <div className="w-full min-w-0">
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Test Your Brush Locally</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Create a test script:</p>
                 <CodeBlock
@@ -340,9 +340,9 @@ python test_brush.py`}
           </TabsContent>
 
           {/* Tab 3: Integration */}
-          <TabsContent value="integration" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16">
+          <TabsContent value="integration" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16 w-full min-w-0 overflow-hidden">
             <div className="space-y-4">
-              <div>
+              <div className="w-full min-w-0">
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 6: Register in Backend</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Update your <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">main.py</code> to load custom brushes:</p>
                 <CodeBlock
@@ -365,7 +365,7 @@ async def render_stroke(effect_name: str, data: StrokeData, request: Request):
                 />
               </div>
 
-              <div>
+              <div className="w-full min-w-0">
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 7: Deploy to Fly.io</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-3 break-words">Once tested, deploy your brush:</p>
                 <div className="flex flex-wrap items-center gap-2 mb-3 text-xs sm:text-sm text-muted-foreground">
@@ -388,7 +388,7 @@ flyctl deploy`}
                 />
               </div>
 
-              <div>
+              <div className="w-full min-w-0">
                 <h3 className="text-base sm:text-lg font-semibold mb-2">File Structure Overview</h3>
                 <CodeBlock
                   id="file-structure"
@@ -409,7 +409,7 @@ flyctl deploy`}
           </TabsContent>
 
           {/* Tab 4: Ideas & Examples */}
-          <TabsContent value="ideas" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16">
+          <TabsContent value="ideas" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16 w-full min-w-0 overflow-hidden">
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-4">Custom Brush Ideas</h3>
