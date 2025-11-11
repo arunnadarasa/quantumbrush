@@ -15,23 +15,25 @@ export const RepositoryLinks = () => {
       <div className="space-y-4 mt-4">
         {/* Backend Repo Card */}
         <div className="border rounded-lg p-4 bg-card">
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-            <div className="flex-1">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="flex-1 min-w-0">
               <h4 className="font-semibold text-base sm:text-lg mb-2">🔧 Backend Repository</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 break-words">
                 Python FastAPI backend with custom brush effects and Fly.io deployment
               </p>
-              <code className="text-xs bg-muted px-2 py-1 rounded block break-all">
-                https://github.com/arunnadarasa/quantum-brush-backend
-              </code>
+              <div className="overflow-x-auto">
+                <code className="text-xs bg-muted px-2 py-1 rounded block whitespace-nowrap">
+                  https://github.com/arunnadarasa/quantum-brush-backend
+                </code>
+              </div>
             </div>
             <a 
               href="https://github.com/arunnadarasa/quantum-brush-backend" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="shrink-0"
+              className="self-start sm:self-auto"
             >
-              <Button size="sm" variant="outline">
+              <Button size="sm" variant="outline" className="w-full sm:w-auto">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 View
               </Button>
@@ -41,23 +43,25 @@ export const RepositoryLinks = () => {
 
         {/* Frontend Repo Card */}
         <div className="border rounded-lg p-4 bg-card">
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-            <div className="flex-1">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="flex-1 min-w-0">
               <h4 className="font-semibold text-base sm:text-lg mb-2">🎨 Frontend Repository</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 break-words">
                 React + TypeScript frontend built with Lovable, featuring quantum brush UI and canvas integration
               </p>
-              <code className="text-xs bg-muted px-2 py-1 rounded block break-all">
-                https://github.com/arunnadarasa/quantumbrush
-              </code>
+              <div className="overflow-x-auto">
+                <code className="text-xs bg-muted px-2 py-1 rounded block whitespace-nowrap">
+                  https://github.com/arunnadarasa/quantumbrush
+                </code>
+              </div>
             </div>
             <a 
               href="https://github.com/arunnadarasa/quantumbrush" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="shrink-0"
+              className="self-start sm:self-auto"
             >
-              <Button size="sm" variant="outline">
+              <Button size="sm" variant="outline" className="w-full sm:w-auto">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 View
               </Button>
@@ -67,23 +71,25 @@ export const RepositoryLinks = () => {
 
         {/* Live Microservice Card */}
         <div className="border rounded-lg p-4 bg-card">
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-            <div className="flex-1">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div className="flex-1 min-w-0">
               <h4 className="font-semibold text-base sm:text-lg mb-2">🚀 Live Microservice</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground mb-3">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-3 break-words">
                 Python microservice deployed on Fly.io for real-time brush effect processing
               </p>
-              <code className="text-xs bg-muted px-2 py-1 rounded block break-all">
-                https://quantumbrush.fly.dev
-              </code>
+              <div className="overflow-x-auto">
+                <code className="text-xs bg-muted px-2 py-1 rounded block whitespace-nowrap">
+                  https://quantumbrush.fly.dev
+                </code>
+              </div>
             </div>
             <a 
               href="https://quantumbrush.fly.dev" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="shrink-0"
+              className="self-start sm:self-auto"
             >
-              <Button size="sm" variant="outline">
+              <Button size="sm" variant="outline" className="w-full sm:w-auto">
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Visit
               </Button>

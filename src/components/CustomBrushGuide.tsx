@@ -16,7 +16,7 @@ export const CustomBrushGuide = () => {
   };
 
   const CodeBlock = ({ code, id, language = 'bash' }: { code: string; id: string; language?: string }) => (
-    <div className="relative group">
+    <div className="relative group w-full">
       <Button
         size="sm"
         variant="ghost"
@@ -25,9 +25,11 @@ export const CustomBrushGuide = () => {
       >
         {copiedCode === id ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
-    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs sm:text-sm">
-      <code className="font-mono">{code}</code>
-    </pre>
+      <div className="overflow-x-auto w-full">
+        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs sm:text-sm whitespace-pre">
+          <code className="font-mono">{code}</code>
+        </pre>
+      </div>
     </div>
   );
 
@@ -41,37 +43,37 @@ export const CustomBrushGuide = () => {
       </DialogHeader>
 
       <Tabs defaultValue="getting-started" className="flex flex-col">
-        <TabsList className="flex overflow-x-auto sm:grid sm:grid-cols-4 gap-1">
-          <TabsTrigger value="getting-started" className="whitespace-nowrap px-3 sm:px-4">
+        <TabsList className="flex overflow-x-auto sm:grid sm:grid-cols-4 gap-1 pb-1">
+          <TabsTrigger value="getting-started" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[80px]">
             <span className="hidden sm:inline">Getting Started</span>
             <span className="sm:hidden">Start</span>
           </TabsTrigger>
-          <TabsTrigger value="implementation" className="whitespace-nowrap px-3 sm:px-4">Implementation</TabsTrigger>
-          <TabsTrigger value="integration" className="whitespace-nowrap px-3 sm:px-4">Integration</TabsTrigger>
-          <TabsTrigger value="ideas" className="whitespace-nowrap px-3 sm:px-4">Ideas</TabsTrigger>
+          <TabsTrigger value="implementation" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[100px]">Implementation</TabsTrigger>
+          <TabsTrigger value="integration" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[100px]">Integration</TabsTrigger>
+          <TabsTrigger value="ideas" className="whitespace-nowrap px-3 sm:px-4 flex-shrink-0 min-w-[80px]">Ideas</TabsTrigger>
         </TabsList>
 
         <div className="mt-4">
           {/* Tab 1: Getting Started */}
-          <TabsContent value="getting-started" className="space-y-6 mt-0 pb-8">
+          <TabsContent value="getting-started" className="space-y-4 sm:space-y-6 mt-0 pb-6 sm:pb-8">
             <div className="space-y-4">
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 1: Understand the Structure</h3>
-                <p className="text-muted-foreground mb-3">
-                  Your brush needs to be placed in: <code className="bg-muted px-2 py-1 rounded">$HOME/QuantumBrush/effect/yourBrushName/</code>
+                <p className="text-muted-foreground mb-3 break-words">
+                  Your brush needs to be placed in: <code className="bg-muted px-2 py-1 rounded text-xs break-all">$HOME/QuantumBrush/effect/yourBrushName/</code>
                 </p>
-                <p className="text-muted-foreground">It should contain:</p>
+                <p className="text-muted-foreground break-words">It should contain:</p>
                 <ul className="list-disc list-inside text-muted-foreground ml-4 mt-2 space-y-1">
-                  <li><code className="bg-muted px-1 py-0.5 rounded text-xs">yourBrushName.py</code> - Main brush logic</li>
-                  <li><code className="bg-muted px-1 py-0.5 rounded text-xs">yourBrushName_requirements.json</code> - Dependencies</li>
+                  <li><code className="bg-muted px-1 py-0.5 rounded text-xs break-all">yourBrushName.py</code> - Main brush logic</li>
+                  <li><code className="bg-muted px-1 py-0.5 rounded text-xs break-all">yourBrushName_requirements.json</code> - Dependencies</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 2: Create the Brush Folder</h3>
-                <p className="text-muted-foreground mb-3">In WSL, run:</p>
-                <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
-                  <ExternalLink className="h-4 w-4" />
+                <p className="text-muted-foreground mb-3 break-words">In WSL, run:</p>
+                <div className="flex flex-wrap items-center gap-2 mb-3 text-sm text-muted-foreground">
+                  <ExternalLink className="h-4 w-4 flex-shrink-0" />
                   <span>Don't have WSL? </span>
                   <a href="https://docs.microsoft.com/en-us/windows/wsl/install" 
                      target="_blank" 
@@ -89,7 +91,7 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
 
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 3: File Setup Basics</h3>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground break-words">
                   You'll create two main files that define your brush's behavior and parameters. The Python file contains the effect logic, while the JSON file specifies dependencies and user-adjustable parameters.
                 </p>
               </div>
@@ -97,11 +99,11 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
           </TabsContent>
 
           {/* Tab 2: Implementation */}
-          <TabsContent value="implementation" className="space-y-8 mt-0 pb-16">
-            <div className="space-y-8">
-              <div className="mb-8">
+          <TabsContent value="implementation" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16">
+            <div className="space-y-6 sm:space-y-8">
+              <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
-                <p className="text-muted-foreground mb-3">Create <code className="bg-muted px-1 py-0.5 rounded text-xs">myCustomBrush.py</code>:</p>
+                <p className="text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush.py</code>:</p>
                 <CodeBlock
                   id="main-brush"
                   language="python"
@@ -167,9 +169,9 @@ if __name__ == "__main__":
                 />
               </div>
 
-              <div className="mb-8">
+              <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 5: Create Requirements File</h3>
-                <p className="text-muted-foreground mb-3">Create <code className="bg-muted px-1 py-0.5 rounded text-xs">myCustomBrush_requirements.json</code>:</p>
+                <p className="text-muted-foreground mb-3 break-words">Create <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">myCustomBrush_requirements.json</code>:</p>
                 <CodeBlock
                   id="requirements"
                   language="json"
@@ -196,9 +198,9 @@ if __name__ == "__main__":
                 />
               </div>
 
-              <div className="mb-8">
+              <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Test Your Brush Locally</h3>
-                <p className="text-muted-foreground mb-3">Create a test script:</p>
+                <p className="text-muted-foreground mb-3 break-words">Create a test script:</p>
                 <CodeBlock
                   id="test-script"
                   code={`cat > ~/QuantumBrush/effect/myCustomBrush/test_brush.py << 'EOF'
@@ -234,11 +236,11 @@ python test_brush.py`}
           </TabsContent>
 
           {/* Tab 3: Integration */}
-          <TabsContent value="integration" className="space-y-8 mt-0 pb-16">
+          <TabsContent value="integration" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16">
             <div className="space-y-4">
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 6: Register in Backend</h3>
-                <p className="text-muted-foreground mb-3">Update your <code className="bg-muted px-1 py-0.5 rounded text-xs">main.py</code> to load custom brushes:</p>
+                <p className="text-muted-foreground mb-3 break-words">Update your <code className="bg-muted px-1 py-0.5 rounded text-xs break-all">main.py</code> to load custom brushes:</p>
                 <CodeBlock
                   id="backend-register"
                   language="python"
@@ -261,9 +263,9 @@ async def render_stroke(effect_name: str, data: StrokeData, request: Request):
 
               <div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">Step 7: Deploy to Fly.io</h3>
-                <p className="text-muted-foreground mb-3">Once tested, deploy your brush:</p>
-                <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
-                  <ExternalLink className="h-4 w-4" />
+                <p className="text-muted-foreground mb-3 break-words">Once tested, deploy your brush:</p>
+                <div className="flex flex-wrap items-center gap-2 mb-3 text-sm text-muted-foreground">
+                  <ExternalLink className="h-4 w-4 flex-shrink-0" />
                   <span>Don't have Fly.io CLI? </span>
                   <a href="https://fly.io/docs/hands-on/install-flyctl/" 
                      target="_blank" 
@@ -303,11 +305,11 @@ flyctl deploy`}
           </TabsContent>
 
           {/* Tab 4: Ideas & Examples */}
-          <TabsContent value="ideas" className="space-y-8 mt-0 pb-16">
+          <TabsContent value="ideas" className="space-y-6 sm:space-y-8 mt-0 pb-8 sm:pb-16">
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-4">Custom Brush Ideas</h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-6 break-words">
                   Here are five creative brush effects you can implement:
                 </p>
               </div>
