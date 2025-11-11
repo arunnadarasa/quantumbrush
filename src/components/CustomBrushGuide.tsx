@@ -3,11 +3,22 @@ import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/c
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Copy, Check, ExternalLink, ChevronDown } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Copy, Check, ExternalLink, ChevronDown, Menu } from 'lucide-react';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
 export const CustomBrushGuide = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('getting-started');
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const tabs = [
+    { value: 'getting-started', label: 'Getting Started', icon: '📚' },
+    { value: 'implementation', label: 'Implementation', icon: '💻' },
+    { value: 'integration', label: 'Integration', icon: '🔌' },
+    { value: 'ideas', label: 'Ideas', icon: '💡' }
+  ];
 
   const copyToClipboard = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
@@ -43,14 +54,71 @@ export const CustomBrushGuide = () => {
         </DialogDescription>
       </DialogHeader>
 
-      <Tabs defaultValue="getting-started" className="flex flex-col w-full min-w-0">
-        <TabsList className="flex flex-col sm:grid sm:grid-cols-4 gap-1 w-full sm:w-auto">
-          <TabsTrigger value="getting-started" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">
+      {/* Mobile Navigation Header - Only visible on mobile */}
+      <div className="sm:hidden mb-4 border-b pb-3">
+        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+          <div className="flex items-center gap-3">
+            <SheetTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <Menu className="h-4 w-4" />
+                <span className="text-sm">Menu</span>
+              </Button>
+            </SheetTrigger>
+            
+            <div className="flex-1">
+              <span className="text-sm font-medium text-muted-foreground">Current:</span>
+              <h3 className="text-base font-semibold">
+                {tabs.find(tab => tab.value === activeTab)?.icon} {tabs.find(tab => tab.value === activeTab)?.label}
+              </h3>
+            </div>
+          </div>
+
+          <SheetContent side="left" className="w-[280px] sm:w-[350px]">
+            <SheetHeader>
+              <SheetTitle>Navigation</SheetTitle>
+            </SheetHeader>
+            
+            <div className="mt-6 space-y-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.value}
+                  onClick={() => {
+                    setActiveTab(tab.value);
+                    setSheetOpen(false);
+                  }}
+                  className={cn(
+                    "w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors",
+                    activeTab === tab.value
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-muted"
+                  )}
+                >
+                  <span className="text-xl">{tab.icon}</span>
+                  <div>
+                    <div className="font-medium">{tab.label}</div>
+                    {activeTab === tab.value && (
+                      <div className="text-xs opacity-90">Currently viewing</div>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col w-full min-w-0">
+        <TabsList className="hidden sm:grid sm:grid-cols-4 gap-1 w-full sm:w-auto">
+          <TabsTrigger value="getting-started" className="px-4">
             Getting Started
           </TabsTrigger>
-          <TabsTrigger value="implementation" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">Implementation</TabsTrigger>
-          <TabsTrigger value="integration" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">Integration</TabsTrigger>
-          <TabsTrigger value="ideas" className="w-full sm:w-auto justify-start sm:justify-center px-3 sm:px-4">Ideas</TabsTrigger>
+          <TabsTrigger value="implementation" className="px-4">Implementation</TabsTrigger>
+          <TabsTrigger value="integration" className="px-4">Integration</TabsTrigger>
+          <TabsTrigger value="ideas" className="px-4">Ideas</TabsTrigger>
         </TabsList>
 
         <div className="mt-3 sm:mt-4">
