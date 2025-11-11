@@ -32,28 +32,31 @@ export const CustomBrushGuide = () => {
   );
 
   return (
-    <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+    <DialogContent className="max-w-[95vw] sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
       <DialogHeader>
-        <DialogTitle className="text-2xl">Create Your Own Quantum Brush</DialogTitle>
-        <DialogDescription>
+        <DialogTitle className="text-xl sm:text-2xl">Create Your Own Quantum Brush</DialogTitle>
+        <DialogDescription className="text-sm sm:text-base">
           Step-by-step guide to building custom brush effects for Quantum Brush
         </DialogDescription>
       </DialogHeader>
 
       <Tabs defaultValue="getting-started" className="flex flex-col">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="getting-started">Getting Started</TabsTrigger>
-          <TabsTrigger value="implementation">Implementation</TabsTrigger>
-          <TabsTrigger value="integration">Integration</TabsTrigger>
-          <TabsTrigger value="ideas">Ideas</TabsTrigger>
+        <TabsList className="flex overflow-x-auto sm:grid sm:grid-cols-4 gap-1">
+          <TabsTrigger value="getting-started" className="whitespace-nowrap px-3 sm:px-4">
+            <span className="hidden sm:inline">Getting Started</span>
+            <span className="sm:hidden">Start</span>
+          </TabsTrigger>
+          <TabsTrigger value="implementation" className="whitespace-nowrap px-3 sm:px-4">Implementation</TabsTrigger>
+          <TabsTrigger value="integration" className="whitespace-nowrap px-3 sm:px-4">Integration</TabsTrigger>
+          <TabsTrigger value="ideas" className="whitespace-nowrap px-3 sm:px-4">Ideas</TabsTrigger>
         </TabsList>
 
-        <div className="mt-4 pr-4">
+        <div className="mt-4">
           {/* Tab 1: Getting Started */}
           <TabsContent value="getting-started" className="space-y-6 mt-0 pb-8">
             <div className="space-y-4">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Step 1: Understand the Structure</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 1: Understand the Structure</h3>
                 <p className="text-muted-foreground mb-3">
                   Your brush needs to be placed in: <code className="bg-muted px-2 py-1 rounded">$HOME/QuantumBrush/effect/yourBrushName/</code>
                 </p>
@@ -65,7 +68,7 @@ export const CustomBrushGuide = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">Step 2: Create the Brush Folder</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 2: Create the Brush Folder</h3>
                 <p className="text-muted-foreground mb-3">In WSL, run:</p>
                 <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
                   <ExternalLink className="h-4 w-4" />
@@ -85,7 +88,7 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">Step 3: File Setup Basics</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 3: File Setup Basics</h3>
                 <p className="text-muted-foreground">
                   You'll create two main files that define your brush's behavior and parameters. The Python file contains the effect logic, while the JSON file specifies dependencies and user-adjustable parameters.
                 </p>
@@ -97,7 +100,7 @@ cd ~/QuantumBrush/effect/myCustomBrush`}
           <TabsContent value="implementation" className="space-y-8 mt-0 pb-16">
             <div className="space-y-8">
               <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 4: Create the Main Brush File</h3>
                 <p className="text-muted-foreground mb-3">Create <code className="bg-muted px-1 py-0.5 rounded text-xs">myCustomBrush.py</code>:</p>
                 <CodeBlock
                   id="main-brush"
@@ -165,7 +168,7 @@ if __name__ == "__main__":
               </div>
 
               <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-2">Step 5: Create Requirements File</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 5: Create Requirements File</h3>
                 <p className="text-muted-foreground mb-3">Create <code className="bg-muted px-1 py-0.5 rounded text-xs">myCustomBrush_requirements.json</code>:</p>
                 <CodeBlock
                   id="requirements"
@@ -194,7 +197,7 @@ if __name__ == "__main__":
               </div>
 
               <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-2">Test Your Brush Locally</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Test Your Brush Locally</h3>
                 <p className="text-muted-foreground mb-3">Create a test script:</p>
                 <CodeBlock
                   id="test-script"
@@ -234,7 +237,7 @@ python test_brush.py`}
           <TabsContent value="integration" className="space-y-8 mt-0 pb-16">
             <div className="space-y-4">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Step 6: Register in Backend</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 6: Register in Backend</h3>
                 <p className="text-muted-foreground mb-3">Update your <code className="bg-muted px-1 py-0.5 rounded text-xs">main.py</code> to load custom brushes:</p>
                 <CodeBlock
                   id="backend-register"
@@ -257,7 +260,7 @@ async def render_stroke(effect_name: str, data: StrokeData, request: Request):
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">Step 7: Deploy to Fly.io</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Step 7: Deploy to Fly.io</h3>
                 <p className="text-muted-foreground mb-3">Once tested, deploy your brush:</p>
                 <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
                   <ExternalLink className="h-4 w-4" />
@@ -280,7 +283,7 @@ flyctl deploy`}
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">File Structure Overview</h3>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">File Structure Overview</h3>
                 <CodeBlock
                   id="file-structure"
                   code={`effect/
@@ -303,7 +306,7 @@ flyctl deploy`}
           <TabsContent value="ideas" className="space-y-8 mt-0 pb-16">
             <div className="space-y-4">
               <div>
-                <h3 className="text-xl font-semibold mb-4">Custom Brush Ideas</h3>
+                <h3 className="text-lg sm:text-xl font-semibold mb-4">Custom Brush Ideas</h3>
                 <p className="text-muted-foreground mb-6">
                   Here are five creative brush effects you can implement:
                 </p>

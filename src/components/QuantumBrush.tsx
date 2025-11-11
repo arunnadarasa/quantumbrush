@@ -4,9 +4,10 @@ import { DrawingCanvas } from '@/components/DrawingCanvas';
 import { EffectControlPanel } from '@/components/EffectControlPanel';
 import { StrokeManager } from '@/components/StrokeManager';
 import { CustomBrushGuide } from '@/components/CustomBrushGuide';
+import { RepositoryLinks } from '@/components/RepositoryLinks';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
-import { Download, Sparkles } from 'lucide-react';
+import { Download, Sparkles, Github } from 'lucide-react';
 import { quantumBrushAPI } from '@/services/quantumBrush';
 import { useToast } from '@/hooks/use-toast';
 import { StrokeData, EffectParameters, DEFAULT_PARAMETERS } from '@/types/stroke';
@@ -259,6 +260,17 @@ const QuantumBrush = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Action Buttons - Fixed on mobile, normal on desktop */}
         <div className="lg:flex lg:justify-end lg:gap-3 mb-4">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="lg" variant="outline" className="w-full lg:w-auto mb-2 lg:mb-0">
+                <Github className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">Repository Links</span>
+                <span className="sm:hidden">View Repos</span>
+              </Button>
+            </DialogTrigger>
+            <RepositoryLinks />
+          </Dialog>
+
           <Dialog>
             <DialogTrigger asChild>
               <Button size="lg" variant="outline" className="w-full lg:w-auto mb-2 lg:mb-0">
